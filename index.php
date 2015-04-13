@@ -1,8 +1,6 @@
 <?php
 
-require __DIR__ . '/classes/Db.php';
+require __DIR__ . '/models/NewsArticle.php';
 
-session_start();
-
-$db = new Db();
-var_dump( $db->findOne('SELECT * FROM news') );
+$model = new NewsArticle();
+var_dump( $model->findAll() );
