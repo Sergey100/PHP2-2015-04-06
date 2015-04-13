@@ -1,6 +1,9 @@
 <?php
 
-require __DIR__ . '/models/NewsArticle.php';
+$ctrl = !empty($_GET['ctrl']) ? $_GET['ctrl'] : 'news';
+$ctrlClassName = ucfirst($ctrl) . 'Controller';
 
-$model = new NewsArticle();
-var_dump( $model->findAll() );
+require __DIR__ . '/controllers/' . $ctrlClassName . '.php';
+
+$controller = new $ctrlClassName;
+$controller->actionAll();
