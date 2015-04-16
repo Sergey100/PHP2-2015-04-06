@@ -27,14 +27,17 @@ class View
         return count($this->data);
     }
 
-    public function display($template)
+    public function render($template)
     {
-        //$this->data['nnn'] == 'vvv'
-        // $nnn == $vvv;
-        // extract($this->data)
         foreach ($this->data as $k => $v) {
             $$k = $v;
         }
+
+        ob_start();
         include($this->path . '/' . $template . '.php');
+        $content = ob_get_contents();
+        ob_end_clean();
+
+        return $content;
     }
 }

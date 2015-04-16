@@ -20,8 +20,7 @@ class NewsController
     {
         $newsModel = new NewsArticle();
         $this->view->items = $newsModel->findAll();
-        $this->view->display('all');
-
+        echo $this->view->render('all');
     }
 
 }
