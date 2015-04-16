@@ -3,8 +3,6 @@
 abstract class AbstractController
 {
 
-    abstract protected function getTemplatePath();
-
     protected function render($template, $data)
     {
         // ['items' => ..., 'user' => ..., ...]
