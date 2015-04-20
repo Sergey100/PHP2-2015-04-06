@@ -3,29 +3,26 @@
 class Db
 {
 
+    protected $dbh;
+
     public function __construct()
     {
         $config = include __DIR__ . '/../config/db.php';
-        mysql_connect($config['host'], $config['user'], $config['password']);
-        mysql_select_db($config['dbname']);
+        $dsn = 'mysql:dbname=' . $config['dbname'] . ';host=' . $config['host'];
+        $this->dbh = new PDO($dsn, $config['user'], $config['password']);
     }
 
-    public function findAll($sql)
+    public function findAll($class, $sql, $params = [])
     {
-        $res = mysql_query($sql);
-        if (false === $res) {
-            return false;
-        }
-        $ret = [];
-        while ($row = mysql_fetch_object($res)) {
-            $ret[] = $row;
-        }
-        return $ret;
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute($params);
+        $res = $sth->fetchAll(PDO::FETCH_CLASS, $class);
+        return $res;
     }
 
-    public function findOne($sql)
+    public function findOne($class, $sql, $params = [])
     {
-        return $this->findAll($sql)[0];
+        return $this->findAll($class, $sql, $params)[0];
     }
 
 }

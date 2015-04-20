@@ -1,7 +1,7 @@
 <?php
 
 class View
-    implements Countable
+    implements Countable, Iterator
 {
 
     protected $path;
@@ -40,4 +40,35 @@ class View
 
         return $content;
     }
+
+    public function display($template)
+    {
+        echo $this->render($template);
+    }
+
+    public function current()
+    {
+        return current($this->data);
+    }
+
+    public function next()
+    {
+        next($this->data);
+    }
+
+    public function key()
+    {
+        return key($this->data);
+    }
+
+    public function valid()
+    {
+        return false !== current($this->data);
+    }
+
+    public function rewind()
+    {
+        reset($this->data);
+    }
+
 }

@@ -18,8 +18,7 @@ class NewsController
 
     public function actionAll()
     {
-        $newsModel = new NewsArticle();
-        $this->view->items = $newsModel->findAll();
+        $this->view->items = NewsArticle::findAll();
         echo $this->view->render('all');
     }
 

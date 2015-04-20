@@ -1,20 +1,15 @@
 <?php
 
-require __DIR__ . '/Article.php';
-require __DIR__ . '/../classes/IModel.php';
+require __DIR__ . '/../classes/Model.php';
 
 class NewsArticle
-    extends Article
-    implements IModel
+    extends Model
 {
 
-    protected function getTable() {
-        return 'news';
-    }
+    protected static $table = 'news';
 
-    public function save()
-    {
-        return $this;
-    }
+    public $id;
+    public $title;
+    public $text;
 
 }
