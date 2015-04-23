@@ -7,6 +7,8 @@ abstract class Model
 
     protected static $table = 'blabla';
 
+    public $id;
+
     public static function getTable()
     {
         return static::$table;
@@ -26,6 +28,29 @@ abstract class Model
         $sql = 'SELECT * FROM ' .static::getTable() . ' WHERE id=:id';
         $db = new Db();
         return $db->findOne($class, $sql, [':id' => $id]);
+    }
+
+    public function insert()
+    {
+        $properties = get_object_vars($this);
+        unset($properties['id']);
+        $columns = array_keys($properties);
+
+        $places = [];
+        $data = [];
+        foreach ($columns as $property) {
+            $places[] = ':' . $property;
+            $data[':' . $property] = $this->$property;
+        }
+
+        $sql = 'INSERT INTO ' . static::getTable() . '
+                (' . implode(', ', $columns) . ')
+                VALUES
+                (' . implode(', ', $places) . ')
+        ';
+        $db = new Db();
+        $db->execute($sql, $data);
+        $this->id = $db->getId();
     }
 
 }

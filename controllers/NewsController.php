@@ -18,8 +18,17 @@ class NewsController
 
     public function actionAll()
     {
+        $art = new NewsArticle();
+        $art->title = 'Новая новость';
+        $art->text = 'Текст новой новости';
+        $art->insert();
+
+        var_dump($art);
+        /*
         $this->view->items = NewsArticle::findAll();
         echo $this->view->render('all');
+        */
     }
+
 
 }

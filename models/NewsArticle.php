@@ -8,7 +8,6 @@ class NewsArticle
 
     protected static $table = 'news';
 
-    public $id;
     public $title;
     public $text;
 
