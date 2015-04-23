@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . '/../classes/Db.php';
-
 abstract class Model
 {
 

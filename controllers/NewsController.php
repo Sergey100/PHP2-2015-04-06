@@ -1,8 +1,5 @@
 <?php
 
-require __DIR__ . '/AbstractController.php';
-require __DIR__ . '/../models/NewsArticle.php';
-require __DIR__ . '/../classes/View.php';
 
 class NewsController
     extends AbstractController
