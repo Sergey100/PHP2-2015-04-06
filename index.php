@@ -1,5 +1,7 @@
 <?php
 
+var_dump($_GET);
+die;
 require __DIR__ . '/autoload.php';
 
 $ctrl = !empty($_GET['ctrl']) ? $_GET['ctrl'] : 'news';
